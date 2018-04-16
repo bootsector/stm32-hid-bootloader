@@ -184,6 +184,11 @@ void HIDUSB_GetDescriptor(USB_SetupPacket *SPacket) {
 		case USB_STR_DESC_TYPE:
 
 			switch (SPacket->wValue.L) {
+			case 0x00:
+				USB_SendData(0, (uint16_t *) sdLangID,
+						SPacket->wLength > sizeof(sdLangID) ?
+								sizeof(sdLangID) : SPacket->wLength);
+				break;
 			case 0x01:
 				USB_SendData(0, (uint16_t *) sdVendor,
 						SPacket->wLength > sizeof(sdVendor) ?

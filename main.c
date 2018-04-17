@@ -40,13 +40,21 @@ int main() {
 	bit_set(GPIOA->CRH, GPIO_CRH_CNF8_1);
 	bit_set(GPIOA->ODR, GPIO_ODR_ODR8);
 
+	// Turn GPIOB clock on
+	bit_set(RCC->APB2ENR, RCC_APB2ENR_IOPBEN);
+
+	// Set B2 as Input Mode Floating
+	bit_clear(GPIOB->CRL, GPIO_CRL_MODE2);
+	bit_set(GPIOB->CRL, GPIO_CRL_CNF2_0);
+	bit_clear(GPIOB->CRL, GPIO_CRL_CNF2_1);
+
 	// Wait 1uS so the pull-up settles...
 	for(int i = 0; i < 72; i++) {
 		asm volatile ("nop\n");
 	}
 
-	// If A8 is LOW, enter HID bootloader...
-	if(!(GPIOA->IDR & GPIO_IDR_IDR8)) {
+	// If A8 is LOW or B2 is HIGH enter HID bootloader...
+	if((!(GPIOA->IDR & GPIO_IDR_IDR8)) || (GPIOB->IDR & GPIO_IDR_IDR2)) {
 		USB_Init(HIDUSB_EPHandler, HIDUSB_Reset);
 
 		for(;;);
@@ -60,6 +68,9 @@ int main() {
 
 	// Turn GPIOA clock off
 	bit_clear(RCC->APB2ENR, RCC_APB2ENR_IOPAEN);
+
+	// Turn GPIOB clock off
+	bit_clear(RCC->APB2ENR, RCC_APB2ENR_IOPBEN);
 
 	SCB->VTOR = USER_PROGRAM;
 

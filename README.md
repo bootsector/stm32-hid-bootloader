@@ -20,5 +20,8 @@ Please check the cli directory for the hid-flash tool source code.
 Bootloader will activate (i.e., enter USB HID mode) if A8 pin is driven LOW when
 bootloader starts. Otherwise, it will just jump to the user program address.
 
+Additionally, if you have a "Blue Pill" board, setting jumper BOOT1 to the 1
+position (and leaving BOOT0 at the 0 position), the bootloader will kick in.
+
 This bootloader should't have any compiler restrictions, so it should work with
 any GCC ARM toolchain version (latest is always recommended!).

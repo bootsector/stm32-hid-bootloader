@@ -23,5 +23,4 @@ bootloader starts. Otherwise, it will just jump to the user program address.
 Additionally, if you have a "Blue Pill" board, setting jumper BOOT1 to the 1
 position (and leaving BOOT0 at the 0 position), the bootloader will kick in.
 
-This bootloader should't have any compiler restrictions, so it should work with
-any GCC ARM toolchain version (latest is always recommended!).
+Latest version of the GCC ARM toolchain is  recommended!

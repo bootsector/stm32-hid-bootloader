@@ -31,43 +31,31 @@ int main() {
 	uint32_t userProgramAddress = *(volatile uint32_t *)(USER_PROGRAM + 0x04);
 	funct_ptr userProgram = (funct_ptr) userProgramAddress;
 
-	// Turn GPIOA clock on
-	bit_set(RCC->APB2ENR, RCC_APB2ENR_IOPAEN);
-
-	// Set A8 as Input Mode with Pull-ups
-	bit_clear(GPIOA->CRH, GPIO_CRH_MODE8);
-	bit_clear(GPIOA->CRH, GPIO_CRH_CNF8_0);
-	bit_set(GPIOA->CRH, GPIO_CRH_CNF8_1);
-	bit_set(GPIOA->ODR, GPIO_ODR_ODR8);
-
 	// Turn GPIOB clock on
 	bit_set(RCC->APB2ENR, RCC_APB2ENR_IOPBEN);
 
-	// Set B2 as Input Mode Floating
+	// Set B2 as Input Pull Down
 	bit_clear(GPIOB->CRL, GPIO_CRL_MODE2);
-	bit_set(GPIOB->CRL, GPIO_CRL_CNF2_0);
-	bit_clear(GPIOB->CRL, GPIO_CRL_CNF2_1);
+	bit_clear(GPIOB->CRL, GPIO_CRL_CNF2_0);
+	bit_set(GPIOB->CRL, GPIO_CRL_CNF2_1);
+	bit_clear(GPIOB->ODR, GPIO_ODR_ODR2);
 
-	// Wait 1uS so the pull-up settles...
+	// Wait 1uS so the pull-down settles...
 	for(int i = 0; i < 72; i++) {
 		asm volatile ("nop\n");
 	}
 
-	// If A8 is LOW or B2 is HIGH enter HID bootloader...
-	if((!(GPIOA->IDR & GPIO_IDR_IDR8)) || (GPIOB->IDR & GPIO_IDR_IDR2)) {
+	// If B2 (BOOT1) is HIGH then go into HID bootloader...
+	if(GPIOB->IDR & GPIO_IDR_IDR2) {
 		USB_Init(HIDUSB_EPHandler, HIDUSB_Reset);
 
 		for(;;);
 	}
 
-	// Set A8 to input floating
-	bit_clear(GPIOA->CRH, GPIO_CRH_MODE8);
-	bit_set(GPIOA->CRH, GPIO_CRH_CNF8_0);
-	bit_clear(GPIOA->CRH, GPIO_CRH_CNF8_1);
-	bit_clear(GPIOA->ODR, GPIO_ODR_ODR8);
-
-	// Turn GPIOA clock off
-	bit_clear(RCC->APB2ENR, RCC_APB2ENR_IOPAEN);
+	// Set B2 to input floating
+	bit_clear(GPIOB->CRL, GPIO_CRL_MODE2);
+	bit_set(GPIOB->CRL, GPIO_CRL_CNF2_0);
+	bit_clear(GPIOB->CRL, GPIO_CRL_CNF2_1);
 
 	// Turn GPIOB clock off
 	bit_clear(RCC->APB2ENR, RCC_APB2ENR_IOPBEN);

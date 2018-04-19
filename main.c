@@ -22,7 +22,7 @@
 #include "hid.h"
 #include "bitwise.h"
 
-// HID Bootloader takes 3K. 1K of config flash follows it.
+// HID Bootloader takes 4K
 #define USER_PROGRAM 0x08001000
 
 typedef void (*funct_ptr)(void);

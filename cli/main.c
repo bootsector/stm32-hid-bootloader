@@ -49,16 +49,16 @@ int main(int argc, char **argv) {
 	uint8_t CMD_RESET_PAGES[8] = {'B','T','L','D','C','M','D', 0x00};
 	hid_device *handle = NULL;
 	size_t read_bytes;
-	FILE *config_file = NULL, *firmware_file = NULL;
+	FILE *firmware_file = NULL;
 	int error = 0;
 
 	setbuf(stdout, NULL);
 
-	printf("HID-Flash v1.0h - STM32 HID Bootloader Flash Tool\n");
+	printf("HID-Flash v1.3 - STM32 HID Bootloader Flash Tool\n");
 	printf("(c) 04/2018 - Bruno Freitas - http://www.brunofreitas.com/\n\n");
 
-	if(argc != 3) {
-		printf("Usage: hid-flash <config_data_file> <firmware_bin_file>\n");
+	if(argc != 2) {
+		printf("Usage: hid-flash <firmware_bin_file>\n");
 
 		return 1;
 	}
@@ -69,13 +69,6 @@ int main(int argc, char **argv) {
 
 	if (!handle) {
 		printf("Unable to open device.\n");
-		error = 1;
-		goto exit;
-	}
-
-	config_file = fopen(argv[1], "rb");
-	if(!config_file) {
-		printf("Error opening config file: %s\n", argv[1]);
 		error = 1;
 		goto exit;
 	}
@@ -102,31 +95,7 @@ int main(int argc, char **argv) {
 
 	memset(hid_buffer, 0, sizeof(hid_buffer));
 
-	fseek(config_file, 0, SEEK_SET);
 	fseek(firmware_file, 0, SEEK_SET);
-
-	// Send Config File data
-	printf("Flashing config file data...\n");
-
-	memset(page_data, 0, sizeof(page_data));
-	read_bytes = fread(page_data, 1, sizeof(page_data), config_file);
-
-	while(read_bytes > 0) {
-
-		for(int i = 0; i < 1024; i += 128) {
-			memcpy(&hid_buffer[1], page_data + i, 128);
-
-			// Flash is unavailable when writing to it, so USB interrupt may fail here
-			if(!usb_write(handle, hid_buffer, 129)) {
-				printf("Error while flashing config data.\n");
-				error = 1;
-				goto exit;
-			}
-		}
-
-		memset(page_data, 0, sizeof(page_data));
-		read_bytes = fread(page_data, 1, sizeof(page_data), config_file);
-	}
 
 	// Send Firmware File data
 	printf("Flashing firmware...\n");
@@ -163,10 +132,6 @@ int main(int argc, char **argv) {
 
 	if(firmware_file) {
 		fclose(firmware_file);
-	}
-
-	if(config_file) {
-		fclose(config_file);
 	}
 
 	return error;

@@ -6,14 +6,11 @@ for STM32F10X devices.
 It doesn't use ST libraries since they are bloated and buggy. Only CMSIS and
 some required system files and macros have been used from ST provided SDK.
 
-This allowed for a very small bootloader - under 3KB!
+This allowed for a very small bootloader - less than 4KB! 
 
-1KB following the bootloader is reserved to the user for storing config data. 
+Firmware .bin files can be flashed with the provided CLI tool like:
 
-If no config data is used, a blank config data (blank-config.bin) is provided so
-firmwares could be flashed by the provided CLI tool like:
-
-hid-flash blank-config.bin MYFIRMWARE.BIN
+hid-flash MYFIRMWARE.BIN
 
 Please check the cli directory for the hid-flash tool source code.
 

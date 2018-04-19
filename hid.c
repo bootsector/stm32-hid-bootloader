@@ -27,8 +27,8 @@
 // This should be <= MAX_EP_NUM defined in usb.h
 #define EP_NUM 2
 
-// This should be the last page taken by the bootloader + 1
-#define MIN_PAGE 3
+// First page to be occupied by the user program
+#define MIN_PAGE 4
 
 static uint8_t CMD_SIGNATURE[] = {'B','T','L','D','C','M','D'};
 

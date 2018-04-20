@@ -42,18 +42,16 @@ int main() {
 	// If B2 (BOOT1) is HIGH then go into HID bootloader...
 	if(GPIOB->IDR & GPIO_IDR_IDR2) {
 		USB_Init(HIDUSB_EPHandler, HIDUSB_Reset);
+	} else {
+		// Turn GPIOB clock off
+		bit_clear(RCC->APB2ENR, RCC_APB2ENR_IOPBEN);
 
-		for(;;);
+		SCB->VTOR = USER_PROGRAM;
+
+		asm volatile("msr msp, %0"::"g"(*(volatile u32 *) USER_PROGRAM));
+
+		userProgram();
 	}
-
-	// Turn GPIOB clock off
-	bit_clear(RCC->APB2ENR, RCC_APB2ENR_IOPBEN);
-
-	SCB->VTOR = USER_PROGRAM;
-
-	asm volatile("msr msp, %0"::"g"(*(volatile u32 *) USER_PROGRAM));
-
-	userProgram();
 
 	for(;;);
 }

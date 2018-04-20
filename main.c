@@ -34,16 +34,10 @@ int main() {
 	// Turn GPIOB clock on
 	bit_set(RCC->APB2ENR, RCC_APB2ENR_IOPBEN);
 
-	// Set B2 as Input Pull Down
+	// Set B2 as Input Mode Floating
 	bit_clear(GPIOB->CRL, GPIO_CRL_MODE2);
-	bit_clear(GPIOB->CRL, GPIO_CRL_CNF2_0);
-	bit_set(GPIOB->CRL, GPIO_CRL_CNF2_1);
-	bit_clear(GPIOB->ODR, GPIO_ODR_ODR2);
-
-	// Wait 1uS so the pull-down settles...
-	for(int i = 0; i < 72; i++) {
-		asm volatile ("nop\n");
-	}
+	bit_set(GPIOB->CRL, GPIO_CRL_CNF2_0);
+	bit_clear(GPIOB->CRL, GPIO_CRL_CNF2_1);
 
 	// If B2 (BOOT1) is HIGH then go into HID bootloader...
 	if(GPIOB->IDR & GPIO_IDR_IDR2) {
@@ -51,11 +45,6 @@ int main() {
 
 		for(;;);
 	}
-
-	// Set B2 to input floating
-	bit_clear(GPIOB->CRL, GPIO_CRL_MODE2);
-	bit_set(GPIOB->CRL, GPIO_CRL_CNF2_0);
-	bit_clear(GPIOB->CRL, GPIO_CRL_CNF2_1);
 
 	// Turn GPIOB clock off
 	bit_clear(RCC->APB2ENR, RCC_APB2ENR_IOPBEN);

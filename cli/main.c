@@ -54,7 +54,7 @@ int main(int argc, char **argv) {
 
 	setbuf(stdout, NULL);
 
-	printf("HID-Flash v1.3 - STM32 HID Bootloader Flash Tool\n");
+	printf("HID-Flash v1.3b - STM32 HID Bootloader Flash Tool\n");
 	printf("(c) 04/2018 - Bruno Freitas - http://www.brunofreitas.com/\n\n");
 
 	if(argc != 2) {
@@ -73,7 +73,7 @@ int main(int argc, char **argv) {
 		goto exit;
 	}
 
-	firmware_file = fopen(argv[2], "rb");
+	firmware_file = fopen(argv[1], "rb");
 	if(!firmware_file) {
 		printf("Error opening firmware file: %s\n", argv[2]);
 		error = 1;

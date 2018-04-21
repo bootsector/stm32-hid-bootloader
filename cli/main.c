@@ -75,7 +75,7 @@ int main(int argc, char **argv) {
 
 	firmware_file = fopen(argv[1], "rb");
 	if(!firmware_file) {
-		printf("Error opening firmware file: %s\n", argv[2]);
+		printf("Error opening firmware file: %s\n", argv[1]);
 		error = 1;
 		goto exit;
 	}

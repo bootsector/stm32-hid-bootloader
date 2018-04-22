@@ -6,12 +6,12 @@ VECTOR_TABLE_OFFSET = 0x0000
 
 SRCS = main.c usb.c hid.c led.c
 
-DEVICE_SRCS += CMSIS/Device/ST/STM32F10x/Source/Templates/gcc/startup_stm32f10x_md.s
+DEVICE_SRCS += ../CMSIS/Device/ST/STM32F10x/Source/Templates/gcc/startup_stm32f10x_md.s
 DEVICE_SRCS += system_stm32f10x.c
 
 INCLUDE_DIRS += -I .
-INCLUDE_DIRS += -I CMSIS/Device/ST/STM32F10x/Include 
-INCLUDE_DIRS += -I CMSIS/Include
+INCLUDE_DIRS += -I ../CMSIS/Device/ST/STM32F10x/Include 
+INCLUDE_DIRS += -I ../CMSIS/Include
 
 LINKER_SCRIPT = STM32F103C8T6.ld
 

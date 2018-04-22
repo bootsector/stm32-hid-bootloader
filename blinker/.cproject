@@ -23,20 +23,20 @@
 							<builder id="cdt.managedbuild.builder.gnu.cross.129154399" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="cdt.managedbuild.builder.gnu.cross"/>
 							<tool id="cdt.managedbuild.tool.gnu.cross.c.compiler.1922508353" name="Cross GCC Compiler" superClass="cdt.managedbuild.tool.gnu.cross.c.compiler">
 								<option id="gnu.c.compiler.option.include.paths.1137180766" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/stm32-hid-bootloader-blinker/CMSIS/Include}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/stm32-hid-bootloader-blinker/CMSIS/Device/ST/STM32F10x/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="../../CMSIS/Include"/>
+									<listOptionValue builtIn="false" value="../../CMSIS/Device/ST/STM32F10x/Include"/>
 								</option>
-								<option id="gnu.c.compiler.option.preprocessor.def.symbols.751972364" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
+								<option id="gnu.c.compiler.option.preprocessor.def.symbols.751972364" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="STM32F10X_MD"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.548308596" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.cross.cpp.compiler.1057019252" name="Cross G++ Compiler" superClass="cdt.managedbuild.tool.gnu.cross.cpp.compiler">
 								<option id="gnu.cpp.compiler.option.include.paths.321794817" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/stm32-hid-bootloader-blinker/CMSIS/Include}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/stm32-hid-bootloader-blinker/CMSIS/Device/ST/STM32F10x/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="../../CMSIS/Include"/>
+									<listOptionValue builtIn="false" value="../../CMSIS/Device/ST/STM32F10x/Include"/>
 								</option>
-								<option id="gnu.cpp.compiler.option.preprocessor.def.1658654864" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
+								<option id="gnu.cpp.compiler.option.preprocessor.def.1658654864" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="STM32F10X_MD"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1639044106" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
@@ -51,8 +51,8 @@
 							<tool id="cdt.managedbuild.tool.gnu.cross.archiver.492783302" name="Cross GCC Archiver" superClass="cdt.managedbuild.tool.gnu.cross.archiver"/>
 							<tool id="cdt.managedbuild.tool.gnu.cross.assembler.1900841735" name="Cross GCC Assembler" superClass="cdt.managedbuild.tool.gnu.cross.assembler">
 								<option id="gnu.both.asm.option.include.paths.2005863254" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/stm32-hid-bootloader-blinker/CMSIS/Include}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/stm32-hid-bootloader-blinker/CMSIS/Device/ST/STM32F10x/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="../../CMSIS/Include"/>
+									<listOptionValue builtIn="false" value="../../CMSIS/Device/ST/STM32F10x/Include"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1073625392" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>

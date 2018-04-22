@@ -1,2 +1,10 @@
 .DS_Store
 .settings/*
+*.o
+*.bin
+*.dis
+*.elf
+*.hex
+*.lst
+*.map
+*.size

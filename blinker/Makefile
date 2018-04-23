@@ -95,5 +95,5 @@ clean:
 	$(RM) -f $(TARGET).map
 	$(RM) -f $(OBJS)
 	
-flash:
+flash: $(TARGET).bin
 	hid-flash $(TARGET).bin

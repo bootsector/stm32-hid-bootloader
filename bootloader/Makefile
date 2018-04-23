@@ -94,3 +94,7 @@ clean:
 	$(RM) -f $(TARGET).dis
 	$(RM) -f $(TARGET).map
 	$(RM) -f $(OBJS)
+	
+flash: $(TARGET).bin
+	st-flash write $(TARGET).bin 0x8000000
+	

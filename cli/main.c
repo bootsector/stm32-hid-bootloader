@@ -54,7 +54,7 @@ int main(int argc, char **argv) {
 
 	setbuf(stdout, NULL);
 
-	printf("HID-Flash v1.3b - STM32 HID Bootloader Flash Tool\n");
+	printf("HID-Flash v1.4 - STM32 HID Bootloader Flash Tool\n");
 	printf("(c) 04/2018 - Bruno Freitas - http://www.brunofreitas.com/\n\n");
 
 	if(argc != 2) {
@@ -65,7 +65,7 @@ int main(int argc, char **argv) {
 
 	hid_init();
 
-	handle = hid_open(0xF055, 0x0001, NULL);
+	handle = hid_open(0x1209, 0xBABE, NULL);
 
 	if (!handle) {
 		printf("Unable to open device.\n");

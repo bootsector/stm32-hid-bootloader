@@ -54,7 +54,7 @@ int main(int argc, char **argv) {
 
 	setbuf(stdout, NULL);
 
-	printf("HID-Flash v1.4 - STM32 HID Bootloader Flash Tool\n");
+	printf("HID-Flash v1.4a - STM32 HID Bootloader Flash Tool\n");
 	printf("(c) 04/2018 - Bruno Freitas - http://www.brunofreitas.com/\n\n");
 
 	if(argc != 2) {

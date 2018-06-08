@@ -37,6 +37,8 @@ void delay_us(uint32_t us) {
 	// Discount an overhead of around 18 cycles
 	SysTick->LOAD = ((SystemCoreClock / 1000000UL) * us) - 18 - 1;
 
+	SysTick->VAL = 0;
+
 	SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_ENABLE_Msk;
 
 	while (!(SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk));

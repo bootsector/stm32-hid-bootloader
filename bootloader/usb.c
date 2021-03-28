@@ -183,7 +183,7 @@ void USB_Init(void (*EPHandlerPtr)(uint16_t), void (*ResetHandlerPtr)(void)) {
 	_SetISTR(0);
 
 	/*** Set interrupt mask ***/
-	_SetCNTR(CNTR_RESETM | CNTR_SUSPM | CNTR_WKUPM);
+	_SetCNTR(CNTR_CTRM | CNTR_RESETM | CNTR_SUSPM | CNTR_WKUPM);
 }
 
 uint16_t USB_IsDeviceConfigured() {

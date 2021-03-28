@@ -25,11 +25,9 @@
 // HID Bootloader takes 4K
 #define USER_PROGRAM 0x08001000
 
-typedef void (*funct_ptr)(void);
-
 int main() {
-	uint32_t userProgramAddress = *(volatile uint32_t *)(USER_PROGRAM + 0x04);
-	funct_ptr userProgram = (funct_ptr) userProgramAddress;
+	uint32_t usrSp = *(volatile uint32_t *)USER_PROGRAM;
+	uint32_t usrMain = *(volatile uint32_t *)(USER_PROGRAM + 0x04); /* reset ptr in vector table */
 
 	// Turn GPIOB clock on
 	bit_set(RCC->APB2ENR, RCC_APB2ENR_IOPBEN);
@@ -48,9 +46,10 @@ int main() {
 
 		SCB->VTOR = USER_PROGRAM;
 
-		asm volatile("msr msp, %0"::"g"(*(volatile u32 *) USER_PROGRAM));
-
-		userProgram();
+		__asm__ volatile(
+			"msr msp, %0\n"
+			"bx %1\n"
+			:: "r" (usrSp), "r" (usrMain));
 	}
 
 	for(;;);

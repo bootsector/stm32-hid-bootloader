@@ -142,6 +142,7 @@ void HIDUSB_Reset() {
 	_SetEPRxAddr(ENDP0, ENDP0_RXADDR);
 	_SetEPTxAddr(ENDP0, ENDP0_TXADDR);
 	_ClearEP_KIND(ENDP0);
+	_SetEPRxCount(ENDP0, 8); /* fixed by Ngo Hung Cuong */
 	_SetEPRxValid(ENDP0);
 
 	/* Initialize Endpoint 1 */
